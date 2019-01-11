@@ -400,23 +400,20 @@ if (message.content.startsWith(adminprefix + 'setT')) {
 
 
 
-client.on('ready',async () => {
- 
-joinVoiceChannel( client.channels.get("489392116535918638"), client.guilds.get("489392116535918634") );
- 
-function joinVoiceChannel(channel, guild) {
-if(channel.type !== 'voice') return console.log(" # Error. - \"The channel type isn't a voice one\"");
-channel.join().then(() => {
-setInterval(() => {
-if(client.user.voiceChannel.id !== guild.channels.get(channel)) {
-channel.join();
+client.on('message', msg => {
+
+    if (msg.content == '=join') {
+        if (msg.member.voiceChannel) {
+
+     if (msg.member.voiceChannel.joinable) {
+         msg.member.voiceChannel.join().then(msg.react('white_check_mark'));
+     }
+    }
 }
-}, 100);
-}).catch(e => {
-if(e) console.log(e);
-});
-}
-});
+})
+client.on('ready', () => {
+    client.channels.get("489392116535918638").join(); 
+    });
 
 
 
