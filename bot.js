@@ -397,7 +397,18 @@ if (message.content.startsWith(adminprefix + 'setT')) {
 }
 }); 
 
-
+client.on('message', message => {
+    if (message.content === ',helpstream') {
+        let helpEmbed = new Discord.RichEmbed()
+        .setTitle('**...اوامر الستريم...**')
+        .addField('setname', 'لتغيير الاسم')
+        .addField('setavatar', 'لتغير الصورة')
+        .addField('setT', 'لوضع تويتش')
+        .addField('setgame', 'لوضع بلاينق')
+        .setFooter('(,help) لاظهار الاوامر ')
+      message.channel.send(helpEmbed);
+    }
+});
 
 
 client.on('message', msg => {
